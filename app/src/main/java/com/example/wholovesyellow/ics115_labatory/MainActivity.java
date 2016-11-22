@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void login(View view) throws UnsupportedEncodingException, JSONException {
 
-//        email = (EditText)findViewById(R.id.editText_email);
-//        password = (EditText)findViewById(R.id.editText_password);
+        email = (EditText)findViewById(R.id.editText_email);
+        password = (EditText)findViewById(R.id.editText_password);
 //
 //        if(email.getText().toString().equals("email") && password.getText().toString().equals("pass")){
 //            Toast.makeText(getApplicationContext(),
@@ -60,13 +60,15 @@ public class MainActivity extends AppCompatActivity {
 //                    Toast.LENGTH_SHORT).show();
 //        }
         RequestParams params = new RequestParams();
+
         AsyncHttpClient client = new AsyncHttpClient();
         JSONObject jsonParams = new JSONObject();
-        jsonParams.put("username", "sirdanny");
-        jsonParams.put("password", "dandalandan");
+        jsonParams.put("username", email.getText().toString());
+        jsonParams.put("password", password.getText().toString());
+
         StringEntity entity = new StringEntity(jsonParams.toString());
 //        "http://urag.co/labatory_api/api/auth"
-        client.post(null, "http://192.168.1.8/devspace/labatory_api/api/auth", entity, "application/json", new AsyncHttpResponseHandler() {
+        client.post(null, "http://urag.co/labatory_api/api/auth", entity, "application/json", new AsyncHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -75,8 +77,14 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject obj = new JSONObject(response);
                     JSONObject meta = obj.getJSONObject("meta");
                     String token = meta.getString("token");
+                    int user_type = obj.getJSONObject("data").getInt("user_type");
 
+                    Toast.makeText(getApplicationContext(), "Successful Login", Toast.LENGTH_LONG).show();
 
+                    Intent loginIntent = new Intent(getApplicationContext(), adminHome.class);
+                    loginIntent.putExtra("user_type", user_type);
+                    startActivity(loginIntent);
+                    finish();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -84,11 +92,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Toast.makeText(getApplicationContext(), "Invalid credentials", Toast.LENGTH_LONG).show();
                 error.printStackTrace();
                 error.getCause();
             }
 
         });
-
     }
 }

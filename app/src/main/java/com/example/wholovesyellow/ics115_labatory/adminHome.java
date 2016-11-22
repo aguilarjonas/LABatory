@@ -35,7 +35,7 @@ public class adminHome extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    String user;
+    int user_type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +43,14 @@ public class adminHome extends AppCompatActivity {
         setContentView(R.layout.activity_admin_home);
 
         Intent receivedIntent = getIntent();
-        user = receivedIntent.getStringExtra("user");
+        user_type = receivedIntent.getIntExtra("user_type", 0);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
-        setupViewPager(mViewPager, user);
+        setupViewPager(mViewPager, user_type);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -112,9 +112,9 @@ public class adminHome extends AppCompatActivity {
         }
     }
 
-    private void setupViewPager(ViewPager viewPager, String user) {
-        if(user != null) {
-            if(user.equals("email")) {
+    private void setupViewPager(ViewPager viewPager, int user_type) {
+        if(user_type != 0) {
+            if(user_type == 1) {
                 SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
                 adapter.addFragment(new RequestsFragment(), "REQUESTS");
                 adapter.addFragment(new InventoryFragment(), "INVENTORY");
