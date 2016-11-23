@@ -23,6 +23,8 @@ import java.io.UnsupportedEncodingException;
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
 
+import com.example.wholovesyellow.ics115_labatory.Model.Model;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -63,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
                     JSONObject meta = obj.getJSONObject("meta");
                     String token = meta.getString("token");
                     int user_type = obj.getJSONObject("data").getInt("user_type");
+
+                    //add to model
+                    Model model = new Model();
+                    model.setToken(token);
+                    model.setUserType(user_type);
 
                     Toast.makeText(getApplicationContext(), "Successful Login", Toast.LENGTH_LONG).show();
                     progress.dismiss();
