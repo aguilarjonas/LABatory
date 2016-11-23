@@ -38,6 +38,7 @@ public class HistoryFragment extends Fragment {
         ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.fragment_admin_hist, container, false);
 
         final ListView listView = (ListView) vg.findViewById(R.id.lv_admin_hist);
+        listView.setEmptyView(vg.findViewById(R.id.nothing_here));
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", Model.getToken());
