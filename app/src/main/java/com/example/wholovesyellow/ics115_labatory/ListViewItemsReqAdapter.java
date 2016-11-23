@@ -1,6 +1,7 @@
 package com.example.wholovesyellow.ics115_labatory;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
@@ -68,11 +69,17 @@ public class ListViewItemsReqAdapter extends ArrayAdapter<String> {
                             .setMessage( "From: " + req_from + "\nItem: " + req_item)
                             .setPositiveButton( "Accept", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
+                                    final ProgressDialog progress = new ProgressDialog(getContext());
+                                    progress.setTitle("Loading");
+                                    progress.setMessage("Wait while loading...");
+                                    progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                                    progress.show();
                                     client.put("http://urag.co/labatory_api/api/requests/" + req_id + "/accept", new AsyncHttpResponseHandler() {
                                         @Override
                                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                                             remove(getItem(position));
                                             notifyDataSetChanged();
+                                            progress.dismiss();
                                             Toast.makeText(getContext(), "Request accepted", Toast.LENGTH_LONG).show();
                                         }
 
@@ -85,7 +92,25 @@ public class ListViewItemsReqAdapter extends ArrayAdapter<String> {
                             })
                             .setNegativeButton( "Decline", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    Log.d( "AlertDialog", "Negative" );
+                                    final ProgressDialog progress = new ProgressDialog(getContext());
+                                    progress.setTitle("Loading");
+                                    progress.setMessage("Wait while loading...");
+                                    progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                                    progress.show();
+                                    client.put("http://urag.co/labatory_api/api/requests/" + req_id + "/decline", new AsyncHttpResponseHandler() {
+                                        @Override
+                                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                            remove(getItem(position));
+                                            notifyDataSetChanged();
+                                            progress.dismiss();
+                                            Toast.makeText(getContext(), "Request declined", Toast.LENGTH_LONG).show();
+                                        }
+
+                                        @Override
+                                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                            Toast.makeText(getContext(), "Error!", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
                                 }
                             } )
                             .show();
