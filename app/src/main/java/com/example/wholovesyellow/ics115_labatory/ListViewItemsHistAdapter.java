@@ -82,7 +82,7 @@ public class ListViewItemsHistAdapter extends ArrayAdapter<String> {
 
                                 new AlertDialog.Builder(getContext())
                                         .setTitle( "Request #" + req_id )
-                                        .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + req_status + "\nDate " + statusText + ": " + date_modified
+                                        .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + statusText + "\nDate " + statusText + ": " + date_modified
                                                     + "\n" + statusText + " By: " + req_careof)
                                         .setPositiveButton( "Close", new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int which) {
