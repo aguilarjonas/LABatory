@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
         jsonParams.put("password", password.getText().toString());
 
         StringEntity entity = new StringEntity(jsonParams.toString());
-//        "http://urag.co/labatory_api/api/auth"
         client.post(null, "http://urag.co/labatory_api/api/auth", entity, "application/json", new AsyncHttpResponseHandler() {
 
             @Override

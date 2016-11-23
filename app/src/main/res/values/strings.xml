@@ -10,14 +10,18 @@
     <string name="login_button">Login</string>
 
     <!-- ADMIN PAGES -->
-        <!-- ADMIN REQUEST PAGE -->
-        <string name="admin_request_list">LIST OF REQUESTS</string>
+    <!-- ADMIN REQUEST PAGE -->
+    <string name="admin_request_list">LIST OF REQUESTS</string>
 
-        <!-- ADMIN INV PAGE -->
-        <string name="admin_inv_list">LIST OF EQUIPMENT</string>
+    <!-- ADMIN INV PAGE -->
+    <string name="admin_inv_list">LIST OF EQUIPMENT</string>
 
-        <!-- ADMIN HISTORY PAGE -->
-        <string name="admin_hist_list">LIST OF PREVIOUS REQUESTS</string>
+    <!-- ADMIN HISTORY PAGE -->
+    <string name="admin_hist_list">LIST OF PREVIOUS REQUESTS</string>
+
+    <!-- USER PAGES -->
+    <!-- USER REQUEST PAGE -->
+    <string name="user_request_list">LIST OF EQUIPMENT</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
