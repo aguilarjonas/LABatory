@@ -10,6 +10,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.wholovesyellow.ics115_labatory.Model.Model;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -70,7 +71,7 @@ public class ListViewItemsReqUserAdapter extends BaseAdapter implements ListAdap
             public void onClick(View v) {
                 try {
                     AsyncHttpClient client = new AsyncHttpClient();
-                    client.addHeader("Authorization", "Bearer eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJjb25zdW1lcktleSI6IkJDSSIsInVzZXJJZCI6IjEiLCJpc3N1ZWRBdCI6IjExXC8yM1wvMjAxNiAxNToyMTo1MiArMDg6MDBOb3YiLCJkYXRhIjp7InVzZXJuYW1lIjoiMjAxMzA1NjA5OSIsInVzZXJfdHlwZSI6IjIifX0.vx4CE1xto6l0XiRoUWkEpn9W4sVdeldswHUwg1DtxcM");
+                    client.addHeader("Authorization", Model.getToken());
                     JSONObject jsonParams = new JSONObject();
                     jsonParams.put("request_item", listItemText.getText().toString());
 
