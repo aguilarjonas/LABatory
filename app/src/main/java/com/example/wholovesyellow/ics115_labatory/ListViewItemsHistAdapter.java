@@ -63,7 +63,12 @@ public class ListViewItemsHistAdapter extends ArrayAdapter<String> {
             vh.viewRequest.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    final ProgressDialog progress = new ProgressDialog(getContext());
+                    progress.setTitle("Loading");
+                    progress.setMessage("Please wait...");
+                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                    progress.show();
                     client.get("http://urag.co/labatory_api/api/requests/" + req_id, new AsyncHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -79,7 +84,7 @@ public class ListViewItemsHistAdapter extends ArrayAdapter<String> {
                                 String statusText = "";
                                 if(req_status == 1) { statusText = "Accepted"; }
                                 else if(req_status == 2) {statusText = "Declined"; }
-
+                                progress.dismiss();
                                 new AlertDialog.Builder(getContext())
                                         .setTitle( "Request #" + req_id )
                                         .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + statusText + "\nDate " + statusText + ": " + date_modified

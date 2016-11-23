@@ -29,14 +29,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(Model.getToken() != null) {
+            Intent loginIntent = new Intent(getApplicationContext(), adminHome.class);
+
+            loginIntent.putExtra("user_type", Model.getUserType());
+            startActivity(loginIntent);
+            finish();
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     private static EditText email;
     private static EditText password;
 
     public void login(View view) throws UnsupportedEncodingException, JSONException {
+
+
 
         email = (EditText)findViewById(R.id.editText_email);
         password = (EditText)findViewById(R.id.editText_password);
@@ -84,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                progress.dismiss();
                 Toast.makeText(getApplicationContext(), "Invalid credentials", Toast.LENGTH_LONG).show();
                 error.printStackTrace();
                 error.getCause();
@@ -91,4 +103,5 @@ public class MainActivity extends AppCompatActivity {
 
         });
     }
+
 }

@@ -2,7 +2,9 @@ package com.example.wholovesyellow.ics115_labatory;
 
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ import cz.msebera.android.httpclient.Header;
 public class RequestsFragment extends Fragment {
 
     ArrayList<String> list = new ArrayList<String>();
+//    SwipeRefreshLayout swipeRefreshLayout;
 
     public RequestsFragment() {
         // Required empty public constructor
@@ -36,6 +39,14 @@ public class RequestsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.fragment_admin_req, container, false);
+
+//        swipeRefreshLayout = (SwipeRefreshLayout)vg.findViewById(R.id.swipe_container);
+//        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                refresh();
+//            }
+//        });
 
         final ListView listView = (ListView) vg.findViewById(R.id.lv_admin_req);
         listView.setEmptyView(vg.findViewById(R.id.nothing_here));
@@ -59,8 +70,6 @@ public class RequestsFragment extends Fragment {
                         if(request_status == 0){
                             list2.add("#" + request_id + " - " + request_from + " - " + request_item);
                         }
-
-
                     }
                     ListViewItemsReqAdapter adapter = new ListViewItemsReqAdapter(container.getContext(), R.layout.fragment_admin_req, list2);
                     listView.setAdapter(adapter);
@@ -80,6 +89,13 @@ public class RequestsFragment extends Fragment {
         return vg;
     }
 
+//    private void refresh(){
+//        new Handler().postDelayed(new Runnable() {
+//            @Override public void run() {
+//                swipeRefreshLayout.setRefreshing(false);
+//            }
+//        }, 5000);
+//    }
 
 
 }
