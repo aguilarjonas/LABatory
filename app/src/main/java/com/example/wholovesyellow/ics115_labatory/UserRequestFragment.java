@@ -28,8 +28,8 @@ public class UserRequestFragment extends Fragment {
         // Inflate the layout for this fragment
         ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.fragment_user_request, container, false);
         ArrayList<String> list = new ArrayList<>();
-        list.add("PROJECTOR");
-        list.add("CABLE");
+        list.add("Projector");
+        list.add("VGA Cable");
 
         ListViewItemsReqUserAdapter adapter = new ListViewItemsReqUserAdapter(list, container.getContext());
 
