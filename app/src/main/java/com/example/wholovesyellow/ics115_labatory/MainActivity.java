@@ -1,5 +1,6 @@
 package com.example.wholovesyellow.ics115_labatory;
 
+import android.app.ProgressDialog;
 import android.content.Entity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -37,28 +38,13 @@ public class MainActivity extends AppCompatActivity {
 
         email = (EditText)findViewById(R.id.editText_email);
         password = (EditText)findViewById(R.id.editText_password);
-//
-//        if(email.getText().toString().equals("email") && password.getText().toString().equals("pass")){
-//            Toast.makeText(getApplicationContext(),
-//                    "Successful Login!",
-//                    Toast.LENGTH_SHORT).show();
-//
-//            Intent loginIntent = new Intent(this, adminHome.class);
-//            loginIntent.putExtra("user", email.getText().toString());
-//            startActivity(loginIntent);
-//        }else if(email.getText().toString().equals("labatory") && password.getText().toString().equals("pass")) {
-//            Toast.makeText(getApplicationContext(),
-//                    "Successful Login!",
-//                    Toast.LENGTH_SHORT).show();
-//
-//            Intent loginIntent = new Intent(this, adminHome.class);
-//            loginIntent.putExtra("user", email.getText().toString());
-//            startActivity(loginIntent);
-//        } else {
-//            Toast.makeText(getApplicationContext(),
-//                    "Invalid Login!",
-//                    Toast.LENGTH_SHORT).show();
-//        }
+
+        final ProgressDialog progress = new ProgressDialog(this);
+        progress.setTitle("Loading");
+        progress.setMessage("Wait while loading...");
+        progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+        progress.show();
+
         RequestParams params = new RequestParams();
 
         AsyncHttpClient client = new AsyncHttpClient();
@@ -80,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                     int user_type = obj.getJSONObject("data").getInt("user_type");
 
                     Toast.makeText(getApplicationContext(), "Successful Login", Toast.LENGTH_LONG).show();
-
+                    progress.dismiss();
                     Intent loginIntent = new Intent(getApplicationContext(), adminHome.class);
                     loginIntent.putExtra("user_type", user_type);
                     startActivity(loginIntent);
