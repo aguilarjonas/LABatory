@@ -1,6 +1,7 @@
 package com.example.wholovesyellow.ics115_labatory;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -53,6 +54,7 @@ public class RequestsFragment extends Fragment {
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", Model.getToken());
+
         client.get("http://urag.co/labatory_api/api/requests", new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -68,7 +70,7 @@ public class RequestsFragment extends Fragment {
                         int request_id = json_data.getInt("request_id");
                         int request_status = json_data.getInt("request_status");
                         if(request_status == 0){
-                            list2.add("#" + request_id + " - " + request_from + " - " + request_item);
+                            list2.add("Request #" + request_id);
                         }
                     }
                     ListViewItemsReqAdapter adapter = new ListViewItemsReqAdapter(container.getContext(), R.layout.fragment_admin_req, list2);

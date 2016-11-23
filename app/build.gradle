@@ -10,6 +10,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [onesignal_app_id: "3b10d8cc-bb2e-4b5f-9c17-b73a5be5f666",
+                                // Project number pulled from dashboard, local value is ignored.
+                                onesignal_google_project_number: "REMOTE"]
     }
     buildTypes {
         release {
@@ -29,4 +32,14 @@ dependencies {
     compile 'com.android.support:support-v4:24.2.1'
     compile 'com.loopj.android:android-async-http:1.4.9'
     testCompile 'junit:junit:4.12'
+    compile 'com.onesignal:OneSignal:3.+@aar'
+
+    // Required for OneSignal, even if you have added FCM.
+    compile 'com.google.android.gms:play-services-gcm:+'
+
+    // Required for geotagging
+    compile "com.google.android.gms:play-services-location:+"
+
+    // play-services-analytics is only needed when using 8.1.0 or older.
+    // compile 'com.google.android.gms:play-services-analytics:+'
 }
