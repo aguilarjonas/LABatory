@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal|center_vertical">
@@ -13,7 +14,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:gravity="start"
             android:orientation="vertical"
             android:paddingLeft="15dp"
             android:paddingRight="15dp">
@@ -24,7 +25,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:gravity="start"
                 android:layout_weight="1"/>
 
             <TextView
@@ -34,19 +34,27 @@
                 android:textSize="12sp"/>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/admin_inv_add"
-            android:layout_width="120dp"
-            android:layout_height="35dp"
-            android:textSize="12sp"
-            android:background="@drawable/bg_add"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
 
-        <Button
-            android:id="@+id/admin_inv_remove"
-            android:layout_width="120dp"
-            android:layout_height="35dp"
-            android:layout_marginRight="10dp"
-            android:textSize="12sp"
-            android:background="@drawable/bg_remove"/>
+            <Button
+                android:id="@+id/admin_inv_add"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:textSize="12sp"
+                android:background="@drawable/bg_add"/>
+
+            <Button
+                android:id="@+id/admin_inv_remove"
+                android:layout_width="120dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="10dp"
+                android:textSize="12sp"
+                android:background="@drawable/bg_remove"/>
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+
+    </LinearLayout>
