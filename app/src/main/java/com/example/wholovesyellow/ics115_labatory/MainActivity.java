@@ -62,9 +62,9 @@ public class MainActivity extends AppCompatActivity {
         email = (EditText)findViewById(R.id.editText_email);
         password = (EditText)findViewById(R.id.editText_password);
 
-        final ProgressDialog progress = new ProgressDialog(this);
-        progress.setTitle("Loading");
-        progress.setMessage("Wait while loading...");
+        final ProgressDialog progress = new ProgressDialog(MainActivity.this, R.style.AppTheme_Dark_Dialog);
+        progress.setIndeterminate(true);
+        progress.setMessage("Authenticating...");
         progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
         progress.show();
 
