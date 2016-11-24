@@ -9,12 +9,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="0.5in"
-    android:background="@color/background"
     android:orientation="vertical"
-    tools:context="com.example.wholovesyellow.ics115_labatory.MainActivity">
+    tools:context="com.example.wholovesyellow.ics115_labatory.MainActivity"
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:layout_height="115dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
         android:src="@drawable/logotory"
@@ -27,7 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/login_margin_from_image"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:textColor="@color/common_google_signin_btn_text_dark_pressed" />
 
     <EditText
         android:id="@+id/editText_email"
@@ -36,14 +38,19 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:keepScreenOn="true"
-        android:typeface="normal"/>
+        android:typeface="normal"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
+        android:textColor="@android:color/white"
+        android:textColorLink="@android:color/white"
+        android:backgroundTint="@android:color/white" />
 
     <TextView
         android:text="@string/login_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView_password"
-        android:textSize="24sp"/>
+        android:textSize="24sp"
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     <EditText
         android:layout_width="match_parent"
@@ -52,7 +59,11 @@
         android:ems="10"
         android:id="@+id/editText_password"
         android:visibility="visible"
-        android:cursorVisible="true" />
+        android:cursorVisible="true"
+        android:textColorHint="@color/common_google_signin_btn_text_dark_default"
+        android:textColor="@android:color/white"
+        android:textColorLink="@android:color/white"
+        android:backgroundTint="@android:color/white" />
 
     <Button
         android:layout_width="150dp"
@@ -60,7 +71,10 @@
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
         android:id="@+id/buttonLogin"
-        android:background="@drawable/bg_login"
-        android:onClick="login" />
+        android:onClick="login"
+        android:textColorLink="@color/colorAccent"
+        android:textColor="@color/colorPrimary"
+        android:background="@android:color/white"
+        android:text="Login" />
 
 </LinearLayout>
