@@ -53,8 +53,7 @@ public class InventoryFragment extends Fragment {
                         String item_name = jsonObject.getString("item_name");
                         int quantity = jsonObject.getInt("item_quantity");
 
-                        list.add(item_name);
-                        list.add(String.valueOf(quantity));
+                        //DITO YUNG PAG-ADD NG ITEM NAME AND QUANTITY SA LISTVIEW
                     }
 
                     ListViewItemsInvAdapter adapter = new ListViewItemsInvAdapter(container.getContext(), R.layout.fragment_admin_inv, list);

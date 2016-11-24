@@ -23,6 +23,9 @@
     <!-- USER REQUEST PAGE -->
     <string name="user_request_list">LIST OF EQUIPMENT</string>
 
+    <!-- USER ACTIVE REQUEST PAGE -->
+    <string name="user_active_request">LIST OF ACTIVE REQUESTS</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
