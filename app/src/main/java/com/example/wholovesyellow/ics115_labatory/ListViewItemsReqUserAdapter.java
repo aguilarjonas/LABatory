@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -20,6 +21,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.entity.StringEntity;
@@ -28,41 +30,27 @@ import cz.msebera.android.httpclient.entity.StringEntity;
  * Created by Jonas on 11/23/2016.
  */
 
-public class ListViewItemsReqUserAdapter extends BaseAdapter implements ListAdapter {
+public class ListViewItemsReqUserAdapter extends ArrayAdapter<String> {
 
-    private ArrayList<String> list = new ArrayList<String>();
+    private int layout;
     private Context context;
 
-    public ListViewItemsReqUserAdapter(ArrayList<String> list, Context context) {
-        this.list = list;
+    public ListViewItemsReqUserAdapter(Context context, int resource, List<String> objects) {
+        super(context, resource, objects);
         this.context = context;
-    }
-
-    @Override
-    public int getCount() {
-        return list.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return list.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return 0;
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
+
         if(view == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.layout_listview_user_req, null);
         }
 
         final TextView listItemText = (TextView) view.findViewById(R.id.user_req_list);
-        listItemText.setText(list.get(position));
+        listItemText.setText(getItem(position));
 
         Button selectedItem = (Button) view.findViewById(R.id.user_req);
 

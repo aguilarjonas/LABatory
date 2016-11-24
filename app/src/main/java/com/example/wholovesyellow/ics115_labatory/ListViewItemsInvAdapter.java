@@ -43,7 +43,7 @@ public class ListViewItemsInvAdapter extends ArrayAdapter<String> {
         client.addHeader("Authorization", Model.getToken());
 
         if(view == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.layout_listview_admin_inv, null);
             ViewHolder vh = new ViewHolder();
             vh.listItemText = (TextView) view.findViewById(R.id.admin_inv_list);
