@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#c43c3c</color>
     <color name="colorAccent_tabs">#fff</color>
     <color name="colorAccent">#c43c3c</color>
+    <color name="login">#f94747</color>
     <color name="background">#ecf0f1</color>
     <color name="accepted">#00B16A</color>
 </resources>
