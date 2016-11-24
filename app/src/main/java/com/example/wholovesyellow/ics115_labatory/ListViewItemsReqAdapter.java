@@ -40,8 +40,6 @@ public class ListViewItemsReqAdapter extends ArrayAdapter<String> {
         layout = resource;
     }
 
-
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -67,6 +65,7 @@ public class ListViewItemsReqAdapter extends ArrayAdapter<String> {
             mainViewholder = (ViewHolder) view.getTag();
             mainViewholder.listItemText.setText(getItem(position));
         }
+
         TextView listItemText2 = (TextView) view.findViewById(R.id.admin_user_list);
         listItemText2.setText(getItem(position));
         Button viewRequest2 = (Button) view.findViewById(R.id.admin_view_list);
