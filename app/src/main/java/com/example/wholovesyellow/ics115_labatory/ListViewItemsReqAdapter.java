@@ -61,89 +61,7 @@ public class ListViewItemsReqAdapter extends ArrayAdapter<String> {
             ViewHolder vh = new ViewHolder();
             vh.listItemText = (TextView) view.findViewById(R.id.admin_user_list);
             vh.viewRequest = (Button) view.findViewById(R.id.admin_view_list);
-            vh.viewRequest.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final ProgressDialog progress = new ProgressDialog(getContext());
-                    progress.setTitle("Loading");
-                    progress.setMessage("Please wait...");
-                    progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
-                    progress.show();
-                    client.get("http://urag.co/labatory_api/api/requests/" + req_id, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            try {
-                                String response = new String(responseBody, "UTF-8");
-                                JSONObject obj = new JSONObject(response);
-                                String req_from = obj.getString("request_from");
-                                String req_item = obj.getString("request_item");
-                                String date_req = obj.getString("date_requested");
-                                progress.dismiss();
-                                new AlertDialog.Builder(getContext())
-                                        .setTitle( "Request #" + req_id )
-                                        .setMessage("Date Requested: " + date_req + "\n\nFrom: " + req_from + "\nItem: " + req_item)
-                                        .setPositiveButton( "Accept", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                final ProgressDialog progress = new ProgressDialog(getContext());
-                                                progress.setTitle("Loading");
-                                                progress.setMessage("Please wait...");
-                                                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
-                                                progress.show();
-                                                client.put("http://urag.co/labatory_api/api/requests/" + req_id + "/accept", new AsyncHttpResponseHandler() {
-                                                    @Override
-                                                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                                        remove(getItem(position));
-                                                        notifyDataSetChanged();
-                                                        progress.dismiss();
-                                                        Toast.makeText(getContext(), "Request accepted", Toast.LENGTH_LONG).show();
-                                                    }
 
-                                                    @Override
-                                                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                                        Toast.makeText(getContext(), "Error!", Toast.LENGTH_LONG).show();
-                                                    }
-                                                });
-                                            }
-                                        })
-                                        .setNegativeButton( "Decline", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                final ProgressDialog progress = new ProgressDialog(getContext());
-                                                progress.setTitle("Loading");
-                                                progress.setMessage("Please wait...");
-                                                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
-                                                progress.show();
-                                                client.put("http://urag.co/labatory_api/api/requests/" + req_id + "/decline", new AsyncHttpResponseHandler() {
-                                                    @Override
-                                                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                                        remove(getItem(position));
-                                                        notifyDataSetChanged();
-                                                        progress.dismiss();
-                                                        Toast.makeText(getContext(), "Request declined", Toast.LENGTH_LONG).show();
-                                                    }
-
-                                                    @Override
-                                                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                                        Toast.makeText(getContext(), "Error!", Toast.LENGTH_LONG).show();
-                                                    }
-                                                });
-                                            }
-                                        } )
-                                        .setCancelable(true)
-                                        .create()
-                                        .show();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                        }
-                    });
-
-                }
-            });
             view.setTag(vh);
         } else {
             mainViewholder = (ViewHolder) view.getTag();
@@ -151,6 +69,90 @@ public class ListViewItemsReqAdapter extends ArrayAdapter<String> {
         }
         TextView listItemText2 = (TextView) view.findViewById(R.id.admin_user_list);
         listItemText2.setText(getItem(position));
+        Button viewRequest2 = (Button) view.findViewById(R.id.admin_view_list);
+        viewRequest2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ProgressDialog progress = new ProgressDialog(getContext());
+                progress.setTitle("Loading");
+                progress.setMessage("Please wait...");
+                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                progress.show();
+                client.get("http://urag.co/labatory_api/api/requests/" + req_id, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        try {
+                            String response = new String(responseBody, "UTF-8");
+                            JSONObject obj = new JSONObject(response);
+                            String req_from = obj.getString("request_from");
+                            String req_item = obj.getString("request_item");
+                            String date_req = obj.getString("date_requested");
+                            progress.dismiss();
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle( "Request #" + req_id )
+                                    .setMessage("Date Requested: " + date_req + "\n\nFrom: " + req_from + "\nItem: " + req_item)
+                                    .setPositiveButton( "Accept", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            final ProgressDialog progress = new ProgressDialog(getContext());
+                                            progress.setTitle("Loading");
+                                            progress.setMessage("Please wait...");
+                                            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                                            progress.show();
+                                            client.put("http://urag.co/labatory_api/api/requests/" + req_id + "/accept", new AsyncHttpResponseHandler() {
+                                                @Override
+                                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                                    remove(getItem(position));
+                                                    notifyDataSetChanged();
+                                                    progress.dismiss();
+                                                    Toast.makeText(getContext(), "Request accepted", Toast.LENGTH_LONG).show();
+                                                }
+
+                                                @Override
+                                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                                    Toast.makeText(getContext(), "Error!", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                        }
+                                    })
+                                    .setNegativeButton( "Decline", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            final ProgressDialog progress = new ProgressDialog(getContext());
+                                            progress.setTitle("Loading");
+                                            progress.setMessage("Please wait...");
+                                            progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                                            progress.show();
+                                            client.put("http://urag.co/labatory_api/api/requests/" + req_id + "/decline", new AsyncHttpResponseHandler() {
+                                                @Override
+                                                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                                    remove(getItem(position));
+                                                    notifyDataSetChanged();
+                                                    progress.dismiss();
+                                                    Toast.makeText(getContext(), "Request declined", Toast.LENGTH_LONG).show();
+                                                }
+
+                                                @Override
+                                                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                                    Toast.makeText(getContext(), "Error!", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                        }
+                                    } )
+                                    .setCancelable(true)
+                                    .create()
+                                    .show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                    }
+                });
+
+            }
+        });
         return view;
     }
 
