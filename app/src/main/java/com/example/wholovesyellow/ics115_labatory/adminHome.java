@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.wholovesyellow.ics115_labatory.Model.Model;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.onesignal.OneSignal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +97,7 @@ public class adminHome extends AppCompatActivity {
                             Model.setToken(null);
                             Model.setUserType(0);
                             Model.setRequestList(null);
-
+                            OneSignal.deleteTag("role");
                             progress.dismiss();
 
                             Intent intent = new Intent(adminHome.this, MainActivity.class);

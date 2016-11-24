@@ -1,8 +1,10 @@
 package com.example.wholovesyellow.ics115_labatory;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +40,8 @@ public class InventoryFragment extends Fragment {
         final ListView listView = (ListView) vg.findViewById(R.id.lv_admin_inv);
         listView.setEmptyView(vg.findViewById(R.id.nothing_here));
 
+
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", Model.getToken());
         client.get("http://urag.co/labatory_api/api/items", new AsyncHttpResponseHandler() {
@@ -52,8 +56,10 @@ public class InventoryFragment extends Fragment {
                         JSONObject jsonObject = jsonArray.getJSONObject(ctr);
                         String item_name = jsonObject.getString("item_name");
                         int quantity = jsonObject.getInt("item_quantity");
+                        int item_id = jsonObject.getInt("inventory_id");
 
                         //DITO YUNG PAG-ADD NG ITEM NAME AND QUANTITY SA LISTVIEW
+                        list.add(item_id + "-" + item_name + "-" + quantity);
                     }
 
                     ListViewItemsInvAdapter adapter = new ListViewItemsInvAdapter(container.getContext(), R.layout.fragment_admin_inv, list);
@@ -71,4 +77,6 @@ public class InventoryFragment extends Fragment {
 
         return vg;
     }
+
+
 }
