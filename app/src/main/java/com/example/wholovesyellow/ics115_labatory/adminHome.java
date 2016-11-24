@@ -167,7 +167,8 @@ public class adminHome extends AppCompatActivity {
                 viewPager.setAdapter(adapter);
             } else {
                 SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-                adapter.addFragment(new UserRequestFragment(), "REQUEST");
+                adapter.addFragment(new UserRequestFragment(), "NEW REQUEST");
+                adapter.addFragment(new ActiveReqFragment(), "ACTIVE REQUEST");
                 adapter.addFragment(new ProfileFragment(), "PROFILE");
                 viewPager.setAdapter(adapter);
             }

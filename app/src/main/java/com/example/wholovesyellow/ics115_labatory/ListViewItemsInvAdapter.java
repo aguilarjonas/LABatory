@@ -55,6 +55,9 @@ public class ListViewItemsInvAdapter extends BaseAdapter implements ListAdapter 
         TextView listItemText = (TextView) view.findViewById(R.id.admin_inv_list);
         listItemText.setText(list.get(position));
 
+        TextView listQtyText = (TextView) view.findViewById(R.id.admin_inv_qty);
+        listQtyText.setText(list.get(position));
+
         Button addButton = (Button) view.findViewById(R.id.admin_inv_add);
         Button removeButton = (Button) view.findViewById(R.id.admin_inv_remove);
 

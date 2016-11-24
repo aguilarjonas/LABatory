@@ -8,7 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import com.example.wholovesyellow.ics115_labatory.Model.Inventory;
+import com.example.wholovesyellow.ics115_labatory.Model.Model;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 
 /**
@@ -26,7 +36,8 @@ public class InventoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.fragment_admin_inv, container, false);
-        ArrayList<String> list = new ArrayList<String>();
+
+        ArrayList<Inventory> list = new ArrayList<Inventory>();
         list.add("PROJECTOR");
         list.add("CABLE");
 
@@ -38,4 +49,25 @@ public class InventoryFragment extends Fragment {
         return vg;
     }
 
+    public void getItemSync() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.addHeader("Authorization", Model.getToken());
+        client.get("http://urag.co/labatory_api/api/items", new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                try {
+                    String response = new String(responseBody, "UTF-8");
+                    JSONObject obj = new JSONObject(response);
+                    JSONArray item_name = obj.getJSONArray('0');
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+    }
 }
