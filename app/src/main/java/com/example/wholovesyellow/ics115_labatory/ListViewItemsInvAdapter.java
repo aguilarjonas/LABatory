@@ -124,7 +124,7 @@ public class ListViewItemsInvAdapter extends ArrayAdapter<String> {
                                                         String response = new String(responseBody, "UTF-8");
                                                         JSONObject obj = new JSONObject(response);
                                                         String details = obj.getString("details");
-                                                        
+
                                                         notifyDataSetChanged();
                                                         dialog.dismiss();
                                                         progress.dismiss();
