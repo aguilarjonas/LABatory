@@ -31,8 +31,7 @@
             android:id="@+id/lv_admin_req"
             android:layout_below="@+id/linear_label_req"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="?attr/actionBarSize">
+            android:layout_height="match_parent">
         </ListView>
 
         <ImageView

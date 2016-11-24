@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     Model model = new Model();
                     model.setToken(token);
                     model.setUserType(user_type);
-                    OneSignal.sendTag("role", "1");
+                    OneSignal.sendTag("role", String.valueOf(user_type));
                     Toast.makeText(getApplicationContext(), "Successful Login", Toast.LENGTH_LONG).show();
                     progress.dismiss();
                     Intent loginIntent = new Intent(getApplicationContext(), adminHome.class);
