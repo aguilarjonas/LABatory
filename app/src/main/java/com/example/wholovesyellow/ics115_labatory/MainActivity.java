@@ -84,13 +84,27 @@ public class MainActivity extends AppCompatActivity {
                     String response = new String(responseBody, "UTF-8");
                     JSONObject obj = new JSONObject(response);
                     JSONObject meta = obj.getJSONObject("meta");
+                    JSONObject data = obj.getJSONObject("data");
+                    String username = data.getString("username");
+                    String full_name = data.getString("name");
                     String token = meta.getString("token");
+                    String position = "";
                     int user_type = obj.getJSONObject("data").getInt("user_type");
+                    if(user_type == 1) {
+                        position = "Laboratory Technician/Admin";
+                    } else {
+                        position = "Student";
+                    }
 
                     //add to model
                     Model model = new Model();
                     model.setToken(token);
                     model.setUserType(user_type);
+                    model.setUsername(username);
+                    model.setPosition(position);
+                    model.setFullname(full_name);
+
+
                     OneSignal.sendTag("role", String.valueOf(user_type));
                     Toast.makeText(getApplicationContext(), "Successful Login", Toast.LENGTH_LONG).show();
                     progress.dismiss();

@@ -11,26 +11,27 @@
         android:text="Position: Laboratory Technician"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
+        android:id="@+id/textView_position"
         android:textSize="20sp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="39dp"
         android:layout_marginEnd="39dp"
-        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_name"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
     <TextView
-        android:text="Username: sirdanny"
+        android:text="Username:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5"
+        android:id="@+id/textView_username"
         android:textSize="20sp"
         android:layout_marginTop="17dp"
-        android:layout_below="@+id/textView4"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
+        android:layout_below="@+id/textView_position"
+        android:layout_alignLeft="@+id/textView_name"
+        android:layout_alignStart="@+id/textView_name"
         android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
     <ImageView
@@ -43,16 +44,16 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="Name: Sir Danny"
+        android:text="Name:"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
+        android:id="@+id/textView_name"
         android:textSize="20sp"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:layout_marginTop="19dp"
         android:layout_below="@+id/imageView"
-        android:layout_alignLeft="@+id/textView4"
-        android:layout_alignStart="@+id/textView4" />
+        android:layout_alignLeft="@+id/textView_position"
+        android:layout_alignStart="@+id/textView_position" />
 
     <TextView
         android:text="Status:"
@@ -62,9 +63,9 @@
         android:textSize="20sp"
         android:layout_marginTop="18dp"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:layout_below="@+id/textView5"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_alignStart="@+id/textView5" />
+        android:layout_below="@+id/textView_username"
+        android:layout_alignLeft="@+id/textView_username"
+        android:layout_alignStart="@+id/textView_username" />
 
     <TextView
         android:text="Active"

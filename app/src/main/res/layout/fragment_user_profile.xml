@@ -20,31 +20,31 @@
         android:text="Username: 2013056099"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView5"
+        android:id="@+id/textView_username2"
         android:textSize="20sp"
         android:layout_marginTop="17dp"
-        android:layout_below="@+id/textView4"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
+        android:layout_below="@+id/textView_position2"
+        android:layout_alignLeft="@+id/textView_name2"
+        android:layout_alignStart="@+id/textView_name2"
         android:textColor="@color/common_google_signin_btn_text_dark_focused" />
 
     <TextView
         android:text="Position: Class President"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView4"
+        android:id="@+id/textView_position2"
         android:textSize="20sp"
         android:layout_marginTop="21dp"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
-        android:layout_below="@+id/textView3"
-        android:layout_alignLeft="@+id/textView5"
-        android:layout_alignStart="@+id/textView5" />
+        android:layout_below="@+id/textView_name2"
+        android:layout_alignLeft="@+id/textView_username2"
+        android:layout_alignStart="@+id/textView_username2" />
 
     <TextView
         android:text="Name: Sample Student"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView3"
+        android:id="@+id/textView_name2"
         android:textSize="20sp"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:layout_below="@+id/imageView2"
