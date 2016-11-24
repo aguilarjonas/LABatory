@@ -25,7 +25,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/lv_admin_req"
+        android:id="@+id/lv_user_activereq"
         android:layout_below="@+id/linear_label_activereq"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
