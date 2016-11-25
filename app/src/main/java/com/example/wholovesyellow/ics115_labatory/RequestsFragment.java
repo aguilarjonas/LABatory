@@ -55,20 +55,22 @@ public class RequestsFragment extends Fragment {
                 try {
                     ArrayList<String> list2 = new ArrayList<String>();
                     String response = new String(responseBody, "UTF-8");
-                    JSONArray jArray = new JSONArray(response);
+                    if(!response.equalsIgnoreCase("")){
+                        JSONArray jArray = new JSONArray(response);
 
-                    for(int i=0; i<jArray.length(); i++){
-                        JSONObject json_data = jArray.getJSONObject(i);
-                        String request_from = json_data.getString("request_from");
-                        String request_item = json_data.getString("request_item");
-                        int request_id = json_data.getInt("request_id");
-                        int request_status = json_data.getInt("request_status");
-                        if(request_status == 0){
-                            list2.add("Request #" + request_id);
+                        for(int i=0; i<jArray.length(); i++){
+                            JSONObject json_data = jArray.getJSONObject(i);
+                            String request_from = json_data.getString("request_from");
+                            String request_item = json_data.getString("request_item");
+                            int request_id = json_data.getInt("request_id");
+                            int request_status = json_data.getInt("request_status");
+                            if(request_status == 0){
+                                list2.add("Request #" + request_id);
+                            }
                         }
+                        ListViewItemsReqAdapter adapter = new ListViewItemsReqAdapter(container.getContext(), R.layout.fragment_admin_req, list2);
+                        listView.setAdapter(adapter);
                     }
-                    ListViewItemsReqAdapter adapter = new ListViewItemsReqAdapter(container.getContext(), R.layout.fragment_admin_req, list2);
-                    listView.setAdapter(adapter);
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -104,20 +106,22 @@ public class RequestsFragment extends Fragment {
                 try {
                     ArrayList<String> list2 = new ArrayList<String>();
                     String response = new String(responseBody, "UTF-8");
-                    JSONArray jArray = new JSONArray(response);
+                    if(!response.equalsIgnoreCase("")){
+                        JSONArray jArray = new JSONArray(response);
 
-                    for(int i=0; i<jArray.length(); i++){
-                        JSONObject json_data = jArray.getJSONObject(i);
-                        String request_from = json_data.getString("request_from");
-                        String request_item = json_data.getString("request_item");
-                        int request_id = json_data.getInt("request_id");
-                        int request_status = json_data.getInt("request_status");
-                        if(request_status == 0){
-                            list2.add("Request #" + request_id);
+                        for(int i=0; i<jArray.length(); i++){
+                            JSONObject json_data = jArray.getJSONObject(i);
+                            String request_from = json_data.getString("request_from");
+                            String request_item = json_data.getString("request_item");
+                            int request_id = json_data.getInt("request_id");
+                            int request_status = json_data.getInt("request_status");
+                            if(request_status == 0){
+                                list2.add("Request #" + request_id);
+                            }
                         }
+                        ListViewItemsReqAdapter adapter = new ListViewItemsReqAdapter(getContext(), R.layout.fragment_admin_req, list2);
+                        listView.setAdapter(adapter);
                     }
-                    ListViewItemsReqAdapter adapter = new ListViewItemsReqAdapter(getContext(), R.layout.fragment_admin_req, list2);
-                    listView.setAdapter(adapter);
                     swipeRefreshLayout.setRefreshing(false);
                 }catch (Exception e){
                     e.printStackTrace();
