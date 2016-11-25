@@ -33,7 +33,7 @@ public class ListViewActiveReqAdapter extends ArrayAdapter<String> {
         ViewHolder mainViewholder = null;
 
         String item = getItem(position);
-        String[] text = item.split("-");
+        String[] text = item.split(",");
         final int req_id = Integer.parseInt(text[0].trim());
         String req_item = text[1].trim();
         String date = text[2].trim();

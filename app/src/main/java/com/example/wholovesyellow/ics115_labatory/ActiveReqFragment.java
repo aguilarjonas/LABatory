@@ -3,6 +3,7 @@ package com.example.wholovesyellow.ics115_labatory;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,8 +60,8 @@ public class ActiveReqFragment extends Fragment {
                             String req_item = jsonObject.getString("request_item");
                             String date = jsonObject.getString("date_requested");
                             int status = jsonObject.getInt("request_status");
-
-                            list.add(req_id + "-" + req_item + "-" + date + "-" + status);
+                            Log.d("LIST: ",req_id + "-" + req_item + "-" + date + "-" + status);
+                            list.add(req_id + "," + req_item + "," + date + "," + status);
                         }
                     }
 
