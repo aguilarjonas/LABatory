@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.example.wholovesyellow.ics115_labatory.Model.Model;
 import com.loopj.android.http.AsyncHttpClient;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,7 +38,7 @@ public class ListViewActiveReqAdapter extends ArrayAdapter<String> {
         String[] text = item.split(",");
         final int req_id = Integer.parseInt(text[0].trim());
         String req_item = text[1].trim();
-        String date = text[2].trim();
+        String stringDate = text[2].trim();
         int status = Integer.parseInt(text[3].trim());
 
         if(view == null) {
@@ -56,22 +58,31 @@ public class ListViewActiveReqAdapter extends ArrayAdapter<String> {
         TextView listItemText = (TextView) view.findViewById(R.id.user_active_req_list);
         listItemText.setText("Request # " + req_id + "-" + req_item);
 
-        TextView listItemDate = (TextView) view.findViewById(R.id.user_active_req_date);
-        listItemDate.setText(date);
+        //format date
+        try {
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat formattedDate = new SimpleDateFormat("MM-dd-yyyy");
+            date.parse(stringDate);
+            formattedDate.format(date);
 
+            TextView listItemDate = (TextView) view.findViewById(R.id.user_active_req_date);
+            listItemDate.setText(formattedDate.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if(status == 0) { //pending
             TextView listItemStatus = (TextView) view.findViewById(R.id.user_active_req_status);
             listItemStatus.setTextColor(view.getResources().getColor(R.color.pending));
-            listItemStatus.setText(view.getResources().getString(R.string.pending));
+            listItemStatus.setText("PENDING");
         } else if(status == 1) { //accepted
             TextView listItemStatus = (TextView) view.findViewById(R.id.user_active_req_status);
             listItemStatus.setTextColor(view.getResources().getColor(R.color.accepted));
-            listItemStatus.setText(view.getResources().getString(R.string.accepted));
+            listItemStatus.setText("ACCEPTED");
         } else if(status == 2){ //declined
             TextView listItemStatus = (TextView) view.findViewById(R.id.user_active_req_status);
             listItemStatus.setTextColor(view.getResources().getColor(R.color.decllined));
-            listItemStatus.setText(view.getResources().getString(R.string.declined));
+            listItemStatus.setText("DECLINED");
         }
 
         return view;
