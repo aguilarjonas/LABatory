@@ -60,13 +60,13 @@ public class ListViewActiveReqAdapter extends ArrayAdapter<String> {
 
         //format date
         try {
-            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            SimpleDateFormat formattedDate = new SimpleDateFormat("MM-dd-yyyy");
-            date.parse(stringDate);
-            formattedDate.format(date);
+            SimpleDateFormat parseFormat = new SimpleDateFormat("yyyy-M-d H:m:s");
+            Date date = parseFormat.parse(stringDate);
+
+            SimpleDateFormat newFormat = new SimpleDateFormat("MMM d, yyyy h:m a");
 
             TextView listItemDate = (TextView) view.findViewById(R.id.user_active_req_date);
-            listItemDate.setText(formattedDate.toString());
+            listItemDate.setText(newFormat.format(date));
         } catch (Exception e) {
             e.printStackTrace();
         }
