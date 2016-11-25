@@ -17,6 +17,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -62,9 +64,10 @@ public class ActiveReqFragment extends Fragment {
                             int status = jsonObject.getInt("request_status");
                             Log.d("LIST: ",req_id + "-" + req_item + "-" + date + "-" + status);
                             list.add(req_id + "," + req_item + "," + date + "," + status);
+
                         }
                     }
-
+                    Collections.reverse(list);
                     ListViewActiveReqAdapter adapter = new ListViewActiveReqAdapter(container.getContext(), R.layout.fragment_active_req, list);
                     listView.setAdapter(adapter);
                 } catch (Exception e) {
