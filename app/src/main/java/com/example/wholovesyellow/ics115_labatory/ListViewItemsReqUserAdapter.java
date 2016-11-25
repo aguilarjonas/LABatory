@@ -64,9 +64,9 @@ public class ListViewItemsReqUserAdapter extends ArrayAdapter<String> {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(getContext())
-                        .setTitle("Logout")
+                        .setTitle("Confirmation")
                         .setMessage("Are you sure you want to request for a " + listItemText.getText().toString() + "?")
-                        .setPositiveButton( "Logout", new DialogInterface.OnClickListener() {
+                        .setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 try {
                                     AsyncHttpClient client = new AsyncHttpClient();
@@ -102,7 +102,7 @@ public class ListViewItemsReqUserAdapter extends ArrayAdapter<String> {
 
                             }
                         })
-                        .setNegativeButton( "Stay", new DialogInterface.OnClickListener() {
+                        .setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 //do nothing
                             }
