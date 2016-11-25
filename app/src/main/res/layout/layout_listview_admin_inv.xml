@@ -44,6 +44,8 @@
                 android:id="@+id/admin_inv_add"
                 android:layout_width="120dp"
                 android:layout_height="35dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:textSize="12sp"
                 android:background="@drawable/bg_add"/>
 
@@ -51,6 +53,8 @@
                 android:id="@+id/admin_inv_remove"
                 android:layout_width="120dp"
                 android:layout_height="35dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:textSize="12sp"
                 android:background="@drawable/bg_remove"/>
