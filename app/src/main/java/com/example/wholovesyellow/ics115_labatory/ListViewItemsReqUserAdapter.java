@@ -1,6 +1,10 @@
 package com.example.wholovesyellow.ics115_labatory;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +19,14 @@ import com.example.wholovesyellow.ics115_labatory.Model.Model;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.onesignal.OneSignal;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -57,37 +63,54 @@ public class ListViewItemsReqUserAdapter extends ArrayAdapter<String> {
         selectedItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    AsyncHttpClient client = new AsyncHttpClient();
-                    client.addHeader("Authorization", Model.getToken());
-                    JSONObject jsonParams = new JSONObject();
-                    jsonParams.put("request_item", listItemText.getText().toString());
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Logout")
+                        .setMessage("Are you sure you want to request for a " + listItemText.getText().toString() + "?")
+                        .setPositiveButton( "Logout", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                try {
+                                    AsyncHttpClient client = new AsyncHttpClient();
+                                    client.addHeader("Authorization", Model.getToken());
+                                    JSONObject jsonParams = new JSONObject();
+                                    jsonParams.put("request_item", listItemText.getText().toString());
 
-                    StringEntity entity = new StringEntity(jsonParams.toString());
-                    client.post(null, "http://urag.co/labatory_api/api/requests", entity, "application/json", new AsyncHttpResponseHandler() {
+                                    StringEntity entity = new StringEntity(jsonParams.toString());
+                                    client.post(null, "http://urag.co/labatory_api/api/requests", entity, "application/json", new AsyncHttpResponseHandler() {
 
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            try {
-                                Toast.makeText(context.getApplicationContext(), "You have successfully requested for: " + listItemText.getText().toString(), Toast.LENGTH_LONG).show();
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                                        @Override
+                                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                            try {
+                                                Toast.makeText(context.getApplicationContext(), "You have successfully requested for: " + listItemText.getText().toString(), Toast.LENGTH_LONG).show();
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                            Toast.makeText(context.getApplicationContext(), "Failed to request for: " + listItemText.getText().toString(), Toast.LENGTH_LONG).show();
+                                            error.printStackTrace();
+                                            error.getCause();
+                                        }
+
+                                    });
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                }
+
                             }
-                        }
+                        })
+                        .setNegativeButton( "Stay", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                //do nothing
+                            }
+                        } )
+                        .setCancelable(true)
+                        .create()
+                        .show();
 
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                            Toast.makeText(context.getApplicationContext(), "Failed to request for: " + listItemText.getText().toString(), Toast.LENGTH_LONG).show();
-                            error.printStackTrace();
-                            error.getCause();
-                        }
-
-                    });
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
 
             }
         });

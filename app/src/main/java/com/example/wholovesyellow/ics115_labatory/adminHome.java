@@ -112,7 +112,7 @@ public class adminHome extends AppCompatActivity {
                             Model.setUserId(0);
                             Model.setFullname(null);
                             Model.setPosition(null);
-                            
+
                             Collection<String> tempList = new ArrayList<String>();
                             tempList.add("role");
                             tempList.add("user_id");
