@@ -77,7 +77,7 @@ public class ListViewItemsInvAdapter extends ArrayAdapter<String> {
         listItemText.setText(item_name);
 
         final TextView listQtyText = (TextView) view.findViewById(R.id.admin_inv_qty);
-        listQtyText.setText(String.valueOf(item_qty));
+        listQtyText.setText("Quantity Left: " + String.valueOf(item_qty));
 
         Button addButton = (Button) view.findViewById(R.id.admin_inv_add);
         Button removeButton = (Button) view.findViewById(R.id.admin_inv_remove);
