@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
                     model.setFullname(full_name);
                     model.setUserId(userId);
 
-
                     JSONObject tags = new JSONObject();
                     tags.put("role", String.valueOf(user_type));
                     tags.put("user_id", String.valueOf(userId));
