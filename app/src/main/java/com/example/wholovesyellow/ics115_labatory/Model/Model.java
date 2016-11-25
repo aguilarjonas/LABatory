@@ -13,6 +13,7 @@ public class Model {
     private static String username;
     private static String position;
     private static String fullname;
+    private static int userId;
 
 
     public Model(){}
@@ -63,6 +64,14 @@ public class Model {
 
     public static void setPosition(String position) {
         Model.position = position;
+    }
+
+    public static int getUserId() {
+        return userId;
+    }
+
+    public static void setUserId(int userId) {
+        Model.userId = userId;
     }
 
 

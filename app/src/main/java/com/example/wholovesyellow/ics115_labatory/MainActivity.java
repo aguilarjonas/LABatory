@@ -88,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     String username = data.getString("username");
                     String full_name = data.getString("name");
                     String token = meta.getString("token");
+                    int userId = Integer.parseInt(obj.getString("id"));
                     String position = "";
                     int user_type = obj.getJSONObject("data").getInt("user_type");
                     if(user_type == 1) {
@@ -103,9 +104,13 @@ public class MainActivity extends AppCompatActivity {
                     model.setUsername(username);
                     model.setPosition(position);
                     model.setFullname(full_name);
+                    model.setUserId(userId);
 
 
-                    OneSignal.sendTag("role", String.valueOf(user_type));
+                    JSONObject tags = new JSONObject();
+                    tags.put("role", String.valueOf(user_type));
+                    tags.put("user_id", String.valueOf(userId));
+                    OneSignal.sendTags(tags);
                     Toast.makeText(getApplicationContext(), "Successful Login", Toast.LENGTH_LONG).show();
                     progress.dismiss();
                     Intent loginIntent = new Intent(getApplicationContext(), adminHome.class);
