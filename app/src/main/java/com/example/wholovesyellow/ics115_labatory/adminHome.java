@@ -178,7 +178,7 @@ public class adminHome extends AppCompatActivity {
             } else {
                 SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
                 adapter.addFragment(new UserRequestFragment(), "NEW REQUEST");
-                adapter.addFragment(new ActiveReqFragment(), "ACTIVE REQUESTS");
+                adapter.addFragment(new ActiveReqFragment(), "HISTORY"); // ACTIVE REQUESTS TO AH DI KO LANG BABAGUHIN YUNG MISMONG FRAGMENT NAME
                 adapter.addFragment(new UserProfileFragment(), "PROFILE");
                 viewPager.setAdapter(adapter);
             }

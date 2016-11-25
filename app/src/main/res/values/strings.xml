@@ -26,6 +26,11 @@
     <!-- USER ACTIVE REQUEST PAGE -->
     <string name="user_active_request">LIST OF ACTIVE REQUESTS</string>
 
+    <!-- STATUS -->
+    <string name="accepted">ACCEPTED</string>
+    <string name="declined">DECLINED</string>
+    <string name="pending">PENDING</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

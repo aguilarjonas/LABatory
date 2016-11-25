@@ -6,19 +6,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:gravity="center_horizontal|center_vertical">
 
-        <TextView
-            android:id="@+id/user_active_req_list"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:gravity="start"
-            android:text="Sample Entry"
-            android:layout_weight="1"/>
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/user_active_req_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:gravity="start"
+                android:text="Sample Entry"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/user_active_req_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textSize="12sp"
+                android:gravity="start"
+                android:text="11-24-2016"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/user_active_req_status"

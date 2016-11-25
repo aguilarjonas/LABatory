@@ -6,8 +6,9 @@
     <color name="colorAccent">#c43c3c</color>
     <color name="login">#f94747</color>
     <color name="background">#ecf0f1</color>
-    <color name="accepted">#00B16A</color>
     <color name="white">#fff</color>
-
+    <color name="accepted">#00B16A</color>
+    <color name="pending">#95A5A6</color>
+    <color name="decllined">#f94747</color>
     <color name="iron">#CCCCCC</color>
 </resources>

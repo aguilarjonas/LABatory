@@ -40,8 +40,6 @@ public class InventoryFragment extends Fragment {
         final ListView listView = (ListView) vg.findViewById(R.id.lv_admin_inv);
         listView.setEmptyView(vg.findViewById(R.id.nothing_here));
 
-
-
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", Model.getToken());
         client.get("http://urag.co/labatory_api/api/items", new AsyncHttpResponseHandler() {
