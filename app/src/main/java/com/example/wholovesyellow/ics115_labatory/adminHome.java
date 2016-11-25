@@ -28,9 +28,12 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.onesignal.OneSignal;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
+
+import static android.R.attr.key;
 
 
 public class adminHome extends AppCompatActivity {
@@ -106,7 +109,14 @@ public class adminHome extends AppCompatActivity {
                             Model.setToken(null);
                             Model.setUserType(0);
                             Model.setRequestList(null);
-                            OneSignal.deleteTag("role");
+                            Model.setUserId(0);
+                            Model.setFullname(null);
+                            Model.setPosition(null);
+                            
+                            Collection<String> tempList = new ArrayList<String>();
+                            tempList.add("role");
+                            tempList.add("user_id");
+                            OneSignal.deleteTags(tempList);
                             progress.dismiss();
 
                             Intent intent = new Intent(adminHome.this, MainActivity.class);
