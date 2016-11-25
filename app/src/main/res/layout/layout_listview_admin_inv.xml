@@ -42,7 +42,7 @@
 
             <Button
                 android:id="@+id/admin_inv_add"
-                android:layout_width="120dp"
+                android:layout_width="100dp"
                 android:layout_height="35dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
@@ -51,7 +51,7 @@
 
             <Button
                 android:id="@+id/admin_inv_remove"
-                android:layout_width="120dp"
+                android:layout_width="100dp"
                 android:layout_height="35dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
