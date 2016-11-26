@@ -44,7 +44,7 @@ public class ListViewItemsHistAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        ListViewItemsHistAdapter.ViewHolder mainViewholder = null;
+        ViewHolder mainViewholder = null;
 
         String req = getItem(position);
         String[] text = req.split("#");
@@ -57,99 +57,103 @@ public class ListViewItemsHistAdapter extends ArrayAdapter<String> {
         if(view == null) {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             view = inflater.inflate(R.layout.layout_listview_admin_hist, null);
-            ListViewItemsHistAdapter.ViewHolder vh = new ListViewItemsHistAdapter.ViewHolder();
+            ViewHolder vh = new ViewHolder();
             vh.listItemText = (TextView) view.findViewById(R.id.admin_hist_list);
             vh.viewRequest = (Button) view.findViewById(R.id.admin_hist_view);
-            vh.viewRequest.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    final ProgressDialog progress = new ProgressDialog(getContext());
-                    progress.setTitle("Loading");
-                    progress.setMessage("Please wait...");
-                    progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
-                    progress.show();
-                    client.get("http://urag.co/labatory_api/api/requests/" + req_id, new AsyncHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                            try {
-                                String response = new String(responseBody, "UTF-8");
-                                JSONObject obj = new JSONObject(response);
-                                String req_from = obj.getString("request_from");
-                                String req_item = obj.getString("request_item");
-                                int req_status = obj.getInt("request_status");
-                                String date_req = obj.getString("date_requested");
-                                String date_modified = obj.getString("date_statusChanged");
-                                String req_careof = obj.getString("request_careof");
-                                String statusText = "";
-                                if(req_status == 1) { statusText = "Accepted"; }
-                                else if(req_status == 2) {statusText = "Declined"; }
-                                progress.dismiss();
-                                if(req_status == 3 || req_status == 2) {
-                                    new AlertDialog.Builder(getContext())
-                                            .setTitle( "Request #" + req_id )
-                                            .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + statusText + "\nDate " + statusText + ": " + date_modified
-                                                    + "\n" + statusText + " By: " + req_careof)
-                                            .setPositiveButton( "Close", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-
-                                                }
-                                            })
-                                            .show();
-                                } else {
-                                    new AlertDialog.Builder(getContext())
-                                            .setTitle( "Request #" + req_id )
-                                            .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + statusText + "\nDate " + statusText + ": " + date_modified
-                                                    + "\n" + statusText + " By: " + req_careof)
-                                            .setPositiveButton( "Accept Return", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-                                                    final ProgressDialog progress = new ProgressDialog(getContext());
-                                                    progress.setTitle("Loading");
-                                                    progress.setMessage("Please wait...");
-                                                    progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
-                                                    progress.show();
-                                                    client.put("http://urag.co/labatory_api/api/requests/" + req_id + "/return", new AsyncHttpResponseHandler() {
-                                                        @Override
-                                                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                                                            notifyDataSetChanged();
-                                                            progress.dismiss();
-                                                            Toast.makeText(getContext(), "Accepted return of Request # " + req_id, Toast.LENGTH_LONG).show();
-                                                        }
-
-                                                        @Override
-                                                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                                                            Toast.makeText(getContext(), "Error!", Toast.LENGTH_LONG).show();
-                                                        }
-                                                    });
-                                                }
-                                            })
-                                            .setNegativeButton( "Close", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int which) {
-
-                                                }
-                                            })
-                                            .show();
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                        }
-                    });
-
-                }
-            });
             view.setTag(vh);
         } else {
             mainViewholder = (ListViewItemsHistAdapter.ViewHolder) view.getTag();
             mainViewholder.listItemText.setText(getItem(position));
         }
+
         TextView listItemText2 = (TextView) view.findViewById(R.id.admin_hist_list);
         listItemText2.setText(getItem(position));
+
+        Button viewRequest = (Button) view.findViewById(R.id.admin_hist_view) ;
+        viewRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final ProgressDialog progress = new ProgressDialog(getContext());
+                progress.setTitle("Loading");
+                progress.setMessage("Please wait...");
+                progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                progress.show();
+                client.get("http://urag.co/labatory_api/api/requests/" + req_id, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        try {
+                            String response = new String(responseBody, "UTF-8");
+                            JSONObject obj = new JSONObject(response);
+                            String req_from = obj.getString("request_from");
+                            String req_item = obj.getString("request_item");
+                            int req_status = obj.getInt("request_status");
+                            String date_req = obj.getString("date_requested");
+                            String date_modified = obj.getString("date_statusChanged");
+                            String req_careof = obj.getString("request_careof");
+                            String statusText = "";
+                            if(req_status == 1) { statusText = "Accepted"; }
+                            else if(req_status == 2) {statusText = "Declined"; }
+                            progress.dismiss();
+                            if(req_status == 3 || req_status == 2) {
+                                new AlertDialog.Builder(getContext())
+                                        .setTitle( "Request #" + req_id )
+                                        .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + statusText + "\nDate " + statusText + ": " + date_modified
+                                                + "\n" + statusText + " By: " + req_careof)
+                                        .setPositiveButton( "Close", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        })
+                                        .show();
+                            } else {
+                                new AlertDialog.Builder(getContext())
+                                        .setTitle( "Request #" + req_id )
+                                        .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + statusText + "\nDate " + statusText + ": " + date_modified
+                                                + "\n" + statusText + " By: " + req_careof)
+                                        .setPositiveButton( "Accept Return", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                final ProgressDialog progress = new ProgressDialog(getContext());
+                                                progress.setTitle("Loading");
+                                                progress.setMessage("Please wait...");
+                                                progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                                                progress.show();
+                                                client.put("http://urag.co/labatory_api/api/requests/" + req_id + "/return", new AsyncHttpResponseHandler() {
+                                                    @Override
+                                                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                                        notifyDataSetChanged();
+                                                        progress.dismiss();
+                                                        Toast.makeText(getContext(), "Accepted return of Request # " + req_id, Toast.LENGTH_LONG).show();
+                                                    }
+
+                                                    @Override
+                                                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                                        Toast.makeText(getContext(), "Error!", Toast.LENGTH_LONG).show();
+                                                    }
+                                                });
+                                            }
+                                        })
+                                        .setNegativeButton( "Close", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        })
+                                        .show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                    }
+                });
+
+            }
+        });
+
         return view;
     }
 
