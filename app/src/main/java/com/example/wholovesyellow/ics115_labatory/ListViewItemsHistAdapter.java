@@ -85,7 +85,7 @@ public class ListViewItemsHistAdapter extends ArrayAdapter<String> {
                                 if(req_status == 1) { statusText = "Accepted"; }
                                 else if(req_status == 2) {statusText = "Declined"; }
                                 progress.dismiss();
-                                if(req_status == 3) {
+                                if(req_status == 3 || req_status == 2) {
                                     new AlertDialog.Builder(getContext())
                                             .setTitle( "Request #" + req_id )
                                             .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + statusText + "\nDate " + statusText + ": " + date_modified
