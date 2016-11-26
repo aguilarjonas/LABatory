@@ -85,16 +85,51 @@ public class ListViewItemsHistAdapter extends ArrayAdapter<String> {
                                 if(req_status == 1) { statusText = "Accepted"; }
                                 else if(req_status == 2) {statusText = "Declined"; }
                                 progress.dismiss();
-                                new AlertDialog.Builder(getContext())
-                                        .setTitle( "Request #" + req_id )
-                                        .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + statusText + "\nDate " + statusText + ": " + date_modified
+                                if(req_status == 3) {
+                                    new AlertDialog.Builder(getContext())
+                                            .setTitle( "Request #" + req_id )
+                                            .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + statusText + "\nDate " + statusText + ": " + date_modified
                                                     + "\n" + statusText + " By: " + req_careof)
-                                        .setPositiveButton( "Close", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
+                                            .setPositiveButton( "Close", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
 
-                                            }
-                                        })
-                                        .show();
+                                                }
+                                            })
+                                            .show();
+                                } else {
+                                    new AlertDialog.Builder(getContext())
+                                            .setTitle( "Request #" + req_id )
+                                            .setMessage( "From: " + req_from + "\nItem: " + req_item + "\nDate Requested: " + date_req + "\n\nStatus: " + statusText + "\nDate " + statusText + ": " + date_modified
+                                                    + "\n" + statusText + " By: " + req_careof)
+                                            .setPositiveButton( "Accept Return", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    final ProgressDialog progress = new ProgressDialog(getContext());
+                                                    progress.setTitle("Loading");
+                                                    progress.setMessage("Please wait...");
+                                                    progress.setCancelable(false); // disable dismiss by tapping outside of the dialog
+                                                    progress.show();
+                                                    client.put("http://urag.co/labatory_api/api/requests/" + req_id + "/return", new AsyncHttpResponseHandler() {
+                                                        @Override
+                                                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                                                            notifyDataSetChanged();
+                                                            progress.dismiss();
+                                                            Toast.makeText(getContext(), "Accepted return of Request # " + req_id, Toast.LENGTH_LONG).show();
+                                                        }
+
+                                                        @Override
+                                                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                                                            Toast.makeText(getContext(), "Error!", Toast.LENGTH_LONG).show();
+                                                        }
+                                                    });
+                                                }
+                                            })
+                                            .setNegativeButton( "Close", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int which) {
+
+                                                }
+                                            })
+                                            .show();
+                                }
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

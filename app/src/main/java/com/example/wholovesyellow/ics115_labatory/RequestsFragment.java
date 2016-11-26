@@ -77,9 +77,12 @@ public class RequestsFragment extends Fragment {
                         ListViewItemsReqAdapter adapter = new ListViewItemsReqAdapter(container.getContext(), R.layout.fragment_admin_req, list2);
                         listView.setAdapter(adapter);
 
-                        listView.setEmptyView(vg.findViewById(R.id.nothing_here));
-                        progressSpinner.setVisibility(View.GONE);
+
+
                     }
+
+                    progressSpinner.setVisibility(View.GONE);
+                    listView.setEmptyView(vg.findViewById(R.id.nothing_here));
                 }catch (Exception e){
                     e.printStackTrace();
                 }
