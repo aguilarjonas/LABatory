@@ -10,5 +10,6 @@
     <color name="accepted">#00B16A</color>
     <color name="pending">#95A5A6</color>
     <color name="decllined">#f94747</color>
+    <color name="returned">#29B6F6</color>
     <color name="iron">#CCCCCC</color>
 </resources>

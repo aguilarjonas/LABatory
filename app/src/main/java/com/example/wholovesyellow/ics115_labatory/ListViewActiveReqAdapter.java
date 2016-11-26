@@ -83,6 +83,10 @@ public class ListViewActiveReqAdapter extends ArrayAdapter<String> {
             TextView listItemStatus = (TextView) view.findViewById(R.id.user_active_req_status);
             listItemStatus.setTextColor(view.getResources().getColor(R.color.decllined));
             listItemStatus.setText("DECLINED");
+        } else if (status == 3) {
+            TextView listItemStatus = (TextView) view.findViewById(R.id.user_active_req_status);
+            listItemStatus.setTextColor(view.getResources().getColor(R.color.returned));
+            listItemStatus.setText("RETURNED");
         }
 
         return view;
