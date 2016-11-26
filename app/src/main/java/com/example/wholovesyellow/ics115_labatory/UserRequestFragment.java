@@ -1,12 +1,14 @@
 package com.example.wholovesyellow.ics115_labatory;
 
 
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.wholovesyellow.ics115_labatory.Model.Model;
 import com.loopj.android.http.AsyncHttpClient;
@@ -37,7 +39,11 @@ public class UserRequestFragment extends Fragment {
         // Inflate the layout for this fragment
         final ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.fragment_user_request, container, false);
         final ListView listView = (ListView) vg.findViewById(R.id.lv_user_req);
-        listView.setEmptyView(vg.findViewById(R.id.nothing_here));
+
+
+        final ProgressBar progressSpinner = (ProgressBar) vg.findViewById(R.id.progressBar);
+        progressSpinner.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        progressSpinner.setVisibility(View.VISIBLE);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", Model.getToken());
@@ -58,6 +64,8 @@ public class UserRequestFragment extends Fragment {
 
                     ListViewItemsReqUserAdapter adapter = new ListViewItemsReqUserAdapter(container.getContext(), R.layout.fragment_user_request, list);
                     listView.setAdapter(adapter);
+                    listView.setEmptyView(vg.findViewById(R.id.nothing_here));
+                    progressSpinner.setVisibility(View.GONE);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

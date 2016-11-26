@@ -2,6 +2,7 @@ package com.example.wholovesyellow.ics115_labatory;
 
 
 import android.app.Dialog;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.wholovesyellow.ics115_labatory.Model.Model;
 import com.loopj.android.http.AsyncHttpClient;
@@ -36,9 +38,12 @@ public class InventoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.fragment_admin_inv, container, false);
+        final ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.fragment_admin_inv, container, false);
         final ListView listView = (ListView) vg.findViewById(R.id.lv_admin_inv);
-        listView.setEmptyView(vg.findViewById(R.id.nothing_here));
+
+        final ProgressBar progressSpinner = (ProgressBar) vg.findViewById(R.id.progressBar);
+        progressSpinner.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        progressSpinner.setVisibility(View.VISIBLE);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", Model.getToken());
@@ -62,6 +67,8 @@ public class InventoryFragment extends Fragment {
 
                     ListViewItemsInvAdapter adapter = new ListViewItemsInvAdapter(container.getContext(), R.layout.fragment_admin_inv, list);
                     listView.setAdapter(adapter);
+                    listView.setEmptyView(vg.findViewById(R.id.nothing_here));
+                    progressSpinner.setVisibility(View.GONE);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

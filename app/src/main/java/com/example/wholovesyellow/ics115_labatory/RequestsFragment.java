@@ -2,6 +2,8 @@ package com.example.wholovesyellow.ics115_labatory;
 
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.wholovesyellow.ics115_labatory.Model.Model;
 import com.loopj.android.http.AsyncHttpClient;
@@ -43,9 +46,12 @@ public class RequestsFragment extends Fragment {
         final ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.fragment_admin_req, container, false);
 
         swipeRefreshLayout = (SwipeRefreshLayout)vg.findViewById(R.id.activity_main_swipe_refresh_layout);
+        swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary), getResources().getColor(R.color.iron), getResources().getColor(R.color.accepted));
         final ListView listView = (ListView) vg.findViewById(R.id.lv_admin_req);
-        listView.setEmptyView(vg.findViewById(R.id.nothing_here));
+        final ProgressBar progressSpinner = (ProgressBar) vg.findViewById(R.id.progressBar);
+        progressSpinner.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
 
+        progressSpinner.setVisibility(View.VISIBLE);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", Model.getToken());
 
@@ -70,6 +76,9 @@ public class RequestsFragment extends Fragment {
                         }
                         ListViewItemsReqAdapter adapter = new ListViewItemsReqAdapter(container.getContext(), R.layout.fragment_admin_req, list2);
                         listView.setAdapter(adapter);
+
+                        listView.setEmptyView(vg.findViewById(R.id.nothing_here));
+                        progressSpinner.setVisibility(View.GONE);
                     }
                 }catch (Exception e){
                     e.printStackTrace();
@@ -95,7 +104,7 @@ public class RequestsFragment extends Fragment {
         return vg;
     }
 
-    private void refreshContent(ViewGroup vg){
+    private void refreshContent(final ViewGroup vg){
         final ListView listView = (ListView) vg.findViewById(R.id.lv_admin_req);
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", Model.getToken());
@@ -122,6 +131,7 @@ public class RequestsFragment extends Fragment {
                         ListViewItemsReqAdapter adapter = new ListViewItemsReqAdapter(getContext(), R.layout.fragment_admin_req, list2);
                         listView.setAdapter(adapter);
                     }
+                    listView.setEmptyView(vg.findViewById(R.id.nothing_here));
                     swipeRefreshLayout.setRefreshing(false);
                 }catch (Exception e){
                     e.printStackTrace();
@@ -134,7 +144,7 @@ public class RequestsFragment extends Fragment {
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
-        }
+    }
 
 
 }

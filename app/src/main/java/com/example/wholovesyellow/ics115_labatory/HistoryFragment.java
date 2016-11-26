@@ -2,12 +2,14 @@ package com.example.wholovesyellow.ics115_labatory;
 
 
 import android.app.ProgressDialog;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.wholovesyellow.ics115_labatory.Model.Model;
 import com.loopj.android.http.AsyncHttpClient;
@@ -36,10 +38,13 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.fragment_admin_hist, container, false);
+        final ViewGroup vg = (ViewGroup) inflater.inflate(R.layout.fragment_admin_hist, container, false);
 
         final ListView listView = (ListView) vg.findViewById(R.id.lv_admin_hist);
-        listView.setEmptyView(vg.findViewById(R.id.nothing_here));
+
+        final ProgressBar progressSpinner = (ProgressBar) vg.findViewById(R.id.progressBar);
+        progressSpinner.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        progressSpinner.setVisibility(View.VISIBLE);
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", Model.getToken());
@@ -49,22 +54,24 @@ public class HistoryFragment extends Fragment {
                 try {
                     ArrayList<String> list2 = new ArrayList<String>();
                     String response = new String(responseBody, "UTF-8");
-                    JSONArray jArray = new JSONArray(response);
+                    if(!response.equalsIgnoreCase("")) {
+                        JSONArray jArray = new JSONArray(response);
 
-                    for(int i=0; i<jArray.length(); i++){
-                        JSONObject json_data = jArray.getJSONObject(i);
-                        String request_from = json_data.getString("request_from");
-                        String request_item = json_data.getString("request_item");
-                        int request_id = json_data.getInt("request_id");
-                        int request_status = json_data.getInt("request_status");
-                        if(request_status != 0){
-                            list2.add("#" + request_id + " - " + request_from + " - " + request_item);
+                        for (int i = 0; i < jArray.length(); i++) {
+                            JSONObject json_data = jArray.getJSONObject(i);
+                            String request_from = json_data.getString("request_from");
+                            String request_item = json_data.getString("request_item");
+                            int request_id = json_data.getInt("request_id");
+                            int request_status = json_data.getInt("request_status");
+                            if (request_status != 0) {
+                                list2.add("#" + request_id + " - " + request_from + " - " + request_item);
+                            }
                         }
-
-
                     }
                     ListViewItemsHistAdapter adapter = new ListViewItemsHistAdapter(container.getContext(), R.layout.fragment_admin_hist, list2);
                     listView.setAdapter(adapter);
+                    listView.setEmptyView(vg.findViewById(R.id.nothing_here));
+                    progressSpinner.setVisibility(View.GONE);
                 }catch (Exception e){
                     e.printStackTrace();
                 }

@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.wholovesyellow.ics115_labatory.UserRequestFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -23,7 +24,23 @@
             android:textSize="15dp"
             android:textStyle="bold"/>
     </LinearLayout>
-
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/nothing_here"
+        android:id="@+id/nothing_here"
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
     <ListView
         android:id="@+id/lv_user_req"
         android:layout_below="@+id/linear_label_user_req"
